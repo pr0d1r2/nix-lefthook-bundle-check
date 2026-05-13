@@ -1,0 +1,14 @@
+---
+pre-commit:
+  commands:
+    bundle-check:
+      glob: "{Gemfile,Gemfile.lock}"
+      run: bundle check --gemfile=Gemfile
+      timeout: 15s
+
+pre-push:
+  commands:
+    bundle-check:
+      glob: "{Gemfile,Gemfile.lock}"
+      run: bundle check --gemfile=Gemfile
+      timeout: 15s
