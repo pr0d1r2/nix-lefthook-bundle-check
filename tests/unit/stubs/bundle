@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+if [ "$1" = "exec" ]; then
+    shift
+    echo "bundle exec $*" >> "${STUB_LOG}"
+    exec "$@"
+fi
+if [ "$1" = "check" ]; then
+    echo "bundle $*" >> "${STUB_LOG}"
+    if [ "${STUB_EXIT:-0}" != "0" ]; then
+        echo "The following gems are missing" >&2
+    else
+        echo "The Gemfile's dependencies are satisfied"
+    fi
+    exit "${STUB_EXIT:-0}"
+fi
+echo "bundle: unknown command $1" >&2
+exit 1
